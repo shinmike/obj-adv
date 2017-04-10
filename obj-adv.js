@@ -27,7 +27,7 @@ function calculateSalesTax(salesData, taxRates) {
 
   for (var info in salesData) {
     var companyName = salesData[info].name;
-    var companyProvince = salesData[info].proivnce;
+    var companyProvince = salesData[info].province;
     var companySales = 0;
     for (i = 0; i < salesData[info].sales.length; i++){
       companySales += salesData[info].sales[i];
@@ -36,8 +36,6 @@ function calculateSalesTax(salesData, taxRates) {
     for (var provTax in taxRates) {
       if (provTax === companyProvince) {
         companyTax = taxRates[provTax];
-      } else {
-        continue;
       }
     }
 
@@ -72,6 +70,8 @@ console.log(results)
   }
 }
 */
+
+
 
 
 
