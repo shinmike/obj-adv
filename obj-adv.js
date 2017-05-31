@@ -1,9 +1,11 @@
+// ---------------------------- Given Sales Tax Rates
 var salesTaxRates = {
   AB: 0.05,
   BC: 0.12,
   SK: 0.10
 };
 
+// ---------------------------- Given Company Sales Data
 var companySalesData = [
   {
     name: "Telus",
@@ -22,16 +24,23 @@ var companySalesData = [
   }
 ];
 
+
+
 function calculateSalesTax(salesData, taxRates) {
   var companyObject = {};
 
+// ---------------------------- loop through companySalesData array, to get to object
   for (var info in salesData) {
     var companyName = salesData[info].name;
     var companyProvince = salesData[info].province;
+
+// ---------------------------- Calculates sales for each company (in different provinces)
     var companySales = 0;
-    for (i = 0; i < salesData[info].sales.length; i++){
+    for (var i = 0; i < salesData[info].sales.length; i++){
       companySales += salesData[info].sales[i];
     }
+
+// ---------------------------- Calculates tax for each company (in different provinces)
     var companyTax = 0;
     for (var provTax in taxRates) {
       if (provTax === companyProvince) {
@@ -39,23 +48,25 @@ function calculateSalesTax(salesData, taxRates) {
       }
     }
 
+// ---------------------------- Creates initial companyObject
     if (!companyObject[companyName]){
       companyObject[companyName] = {
         totalSales: 0,
         totalTaxes: 0
-      }
+      };
     }
 
+// ---------------------------- Updates appropriate companyObject values
     companyObject[companyName].totalSales += companySales;
     companyObject[companyName].totalTaxes += companySales * companyTax;
 
   }
-  return JSON.stringify(companyObject, null, ' ')
+  return JSON.stringify(companyObject, null, ' ');
 }
 
 var results = calculateSalesTax(companySalesData, salesTaxRates);
+console.log(results);
 
-console.log(results)
 
 
 /* Expected Results:
